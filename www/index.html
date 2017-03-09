@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' data: gap: 'unsafe-eval'; style-src * 'self' 'unsafe-inline'; connect-src * ; script-src * 'self' 'unsafe-inline'; media-src *">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/utils.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+        <title>Record Weight</title>
+    </head>
+    <body >
+        <div id="home" data-role="page">
+            <div role="main" class="ui-content">
+                <div data-role="navbar">
+                  <ul>
+                    <li>
+                      <a id="page_1_btn">體重紀錄</a>
+                    </li>
+                    <li>
+                      <a id="page_2_btn">RSS應用</a>
+                    </li>
+                    <li>
+                      <a id="page_3_btn">Chart初學</a>
+                    </li>
+                  </ul>
+                </div>
+                <div id="page_1">
+                    體重:<input type="number" id="weight"><br />
+                    體脂肪:<input type="number" id="bodyFat"><br />
+                    肌肉量:<input type="number" id="muscle"><br /> 
+                    <a class="ui-btn" id="clacData">計算</a>
+                    <a class="ui-btn" id="clearData">清除</a>
+
+                    <span id="showData"></span>
+                </div>
+                <div id="page_2">
+                    <form> 
+                        <p>Select an RSS-Feed:</p>
+                        <select onchange="showRSS(this.value)">
+                            <option value="Google">Google News</option>
+                            <option value="MSNBC">MSNBC News</option>
+                        </select>
+                    </form>
+                    <p><div id="rssOutput">
+                        <b>RSS Feed will be listed here.</b>
+                    </div></p>
+                </div>
+                <div id="page_3">
+                    <div id="container">
+                        <canvas id="canvas"></canvas>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
