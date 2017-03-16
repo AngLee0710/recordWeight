@@ -12,7 +12,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
         <title>Record Weight</title>
     </head>
-    <body >
+    <body onSelectStart="event.returnValue=false">
         <div id="home" data-role="page">
             <div role="main" class="ui-content">
                 <div data-role="navbar">
@@ -21,10 +21,7 @@
                       <a id="page_1_btn">體重紀錄</a>
                     </li>
                     <li>
-                      <a id="page_2_btn">RSS應用</a>
-                    </li>
-                    <li>
-                      <a id="page_3_btn">Chart初學</a>
+                      <a id="page_2_btn">體重顯示</a>
                     </li>
                   </ul>
                 </div>
@@ -38,18 +35,15 @@
                     <span id="showData"></span>
                 </div>
                 <div id="page_2">
-                    <form> 
-                        <p>Select an RSS-Feed:</p>
-                        <select onchange="showRSS(this.value)">
-                            <option value="Google">Google News</option>
-                            <option value="MSNBC">MSNBC News</option>
-                        </select>
-                    </form>
-                    <p><div id="rssOutput">
-                        <b>RSS Feed will be listed here.</b>
-                    </div></p>
-                </div>
-                <div id="page_3">
+                <fieldset data-role="fieldcontain">
+                    <label for="day" style="font-size: 20px;font-weight: bold;">選擇查詢方式:</label>
+                    <select name="day" id="time">
+                        <option value="day">今天</option>
+                        <option value="week">本週</option>
+                        <option value="mon">這個月</option>
+                        <option value="year">今年</option>
+                    </select>
+                </fieldset>
                     <div id="container">
                         <canvas id="canvas"></canvas>
                     </div> 

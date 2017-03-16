@@ -52,7 +52,7 @@ $('#clacData').click(function() {
     updataRecord = {Today: today, Weight: $('#weight').val(), BodyFat: bodyFatSum, Muscle: muscleSum}; 
 
     $.ajax({
-         url: 'http://140.130.35.62/csie40343113/php/updataRecord.php',
+         url: 'http://140.130.35.62/csie40343113/php/recordWeight.php',
          type: 'POST',
          data: updataRecord,
          success: function(result,status){
@@ -77,6 +77,7 @@ $('#page_2_btn').click(function() {
     $('#page_2').show();
     getchPHPreturn(); 
 })
+
 //選擇日期
 $('#time').change(function () {
     switch($(this).val())
