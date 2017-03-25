@@ -33,7 +33,33 @@ $('#page_1_btn').click(function() {
 
 //計算按鍵
 $('#clacData').click(function() {
-    check();//判斷資料輸入
+    $('#showData').html('');
+    $('#showData').show();
+    if($('#weight').val() == '' || $('#bodyFat').val() == '' || $('#muscle').val() == '')
+    {
+        $('#showData').html('資料輸入不完全!!!');
+        $('#showData').delay(1500).hide(1);
+        return;
+    }
+
+    if($('#weight').val().length > 3 || $('#weight').val() < 0)
+    {
+        $('#showData').html('體重數值有誤!!!');
+        $('#showData').delay(1500).hide(1);
+        return;
+    }
+    if($('#bodyFat').val() > 100.0 || $('#bodyFat').val() < 0)
+    {
+        $('#showData').html('體脂數值有誤!!!');
+        $('#showData').delay(1500).hide(1);
+        return;
+    }
+    if($('#muscle').val() > 100.0 || $('#muscle').val() < 0)
+    {
+        $('#showData').html('肌肉數值有誤!!!');
+        $('#showData').delay(1500).hide(1);
+        return;
+    }
 
     var updataRecord;//傳給資料庫的JSON
 
@@ -49,16 +75,24 @@ $('#clacData').click(function() {
     // $('#showData').html('體重 = ' + $('#weight').val() + '<br>脂肪體重 = ' + bodyFatSum +
     //                     '<br>肌肉體重 = ' + muscleSum);
 
-    updataRecord = {Today: today, Weight: $('#weight').val(), BodyFat: bodyFatSum, Muscle: muscleSum}; 
+    updataRecord = {Today: today, Weight: $('#weight').val(), BodyFat: bodyFatSum, Muscle: muscleSum};
 
     $.ajax({
          url: 'http://140.130.35.62/csie40343113/php/recordWeight.php',
          type: 'POST',
          data: updataRecord,
          success: function(result,status){
+            $('#weight').val('');
+            $('#muscle').val('');
+            $('#bodyFat').val('');
+            $('#showData').html('資料上傳成功!!!');
+            $('#showData').delay(1500).hide(1);
+            getchPHPreturn();
          },
          error: function(XMLHttpRequest, textStatus, errorThrown){
             console.log(errorThrown);
+            $('#showData').html('資料上傳失敗!!!');
+            $('#showData').delay(1500).hide(1);
          }
     });
 })
@@ -75,7 +109,8 @@ $('#clearData').click(function() {
 $('#page_2_btn').click(function() {
     $('#page_1').hide();
     $('#page_2').show();
-    getchPHPreturn(); 
+    getchPHPreturn();
+    drawChartByDay(); 
 })
 
 //選擇日期
@@ -101,22 +136,6 @@ $('#time').change(function () {
 function init() {
     $('#page_2').hide();
     getchPHPreturn();
-}
-
-//檢查輸入
-function check() {
-    if($('#weight').val() == '' || $('#bodyFat').val() == '' || $('#muscle').val() == '')
-    {
-        $('#showData').html('資料輸入不完全');
-        return;
-    }
-
-    if($('#weight').val().length > 5)
-        return;
-    if($('#bodyFat').val().length > 4)
-        return;
-    if($('#muscle').val().length > 4)
-        return;
 }
 
 //接收資料
